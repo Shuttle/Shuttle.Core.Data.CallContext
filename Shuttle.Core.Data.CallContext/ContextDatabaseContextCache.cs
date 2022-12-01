@@ -1,4 +1,6 @@
-﻿namespace Shuttle.Core.Data.CallContext
+﻿using System;
+
+namespace Shuttle.Core.Data.CallContext
 {
     public class ContextDatabaseContextCache : IDatabaseContextCache
     {
@@ -12,6 +14,11 @@
         public ActiveDatabaseContext Use(IDatabaseContext context)
         {
             return GuardedCache().Use(context);
+        }
+
+        public IDatabaseContext Find(Predicate<IDatabaseContext> match)
+        {
+            return GuardedCache().Find(match);
         }
 
         public bool Contains(string connectionString)
